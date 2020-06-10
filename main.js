@@ -9,7 +9,12 @@ function createWindow() {
 	mainWindow = new BrowserWindow({
 		width: 800,
 		height: 600,
-		useContentSize: true
+		useContentSize: true,
+		webPreferences: {
+			preload: path.join(__dirname, 'preload.js'),
+			enableRemoteModule: true,
+			nodeIntegration: true
+		}
 	})
 
 	let indexPath = url.format({
@@ -18,9 +23,8 @@ function createWindow() {
 		slashes: true
 	})
 
-	console.log(indexPath);
-
 	mainWindow.loadURL(indexPath)
+	mainWindow.webContents.openDevTools();
 
 	mainWindow.on('closed', function() {
 		mainWindow = null
