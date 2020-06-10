@@ -6,7 +6,7 @@ console.log(config);
 
 function setup() {
 	createCanvas(windowWidth, windowHeight, SVG);
-	colorMode(HSB, 100);
+	colorMode(HSB);
 
 	background(config.bgColor);
 	stroke(config.penColor);
@@ -22,6 +22,6 @@ function setup() {
 
 	console.log('starting');
 	
-	let newLine = new bezierLines(50, 10);
-	newLine.makeShape();
+	let lines = new bezierLines(20, 20);
+	lines.run();
 }
