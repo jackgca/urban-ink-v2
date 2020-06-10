@@ -1,0 +1,16 @@
+{
+  "name": "urban-ink-v2",
+  "version": "0.0.1",
+  "description": "generative art framework with p5.js",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron ."
+  },
+  "author": "Jack Graham",
+  "license": "ISC",
+  "dependencies": {
+    "electron": "^9.0.3",
+    "p5": "^1.0.0"
+  }
+}
