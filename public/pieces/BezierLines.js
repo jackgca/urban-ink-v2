@@ -25,12 +25,15 @@ class BezierLine {
 }
 
 class BezierLines {
-    constructor(line_size, num_lines) {
+    constructor(line_size, num_lines, is_black) {
         this.colors = [
             [3, 70, 90, 1],
             [45, 70, 90, 1],
             [201, 82, 93, 1]
         ];
+        if (is_black) {
+            this.colors = [0, 0, 0, 1];
+        }
         this.line_size = line_size;
         this.num_lines = num_lines;
     }
@@ -50,4 +53,11 @@ class BezierLines {
     }
 }
 
-module.exports = BezierLines;
+module.exports = {
+    example: function() {
+        let lines = new BezierLines(40, 8, true);
+	    lines.run();
+    },
+    BezierLines,
+    BezierLine
+}

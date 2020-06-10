@@ -1,6 +1,7 @@
 // general settings
 
-let bezierLines = require('../public/pieces/BezierLines.js')
+let utils = require('../public/utils/index.js');
+utils.loadPiece('BezierLines');
 
 console.log(config);
 
@@ -22,6 +23,8 @@ function setup() {
 
 	console.log('starting');
 	
-	let lines = new bezierLines(20, 20);
-	lines.run();
+	//BezierLines.example();
+
+	let newLine = new BezierLines.BezierLine(30, 40);
+	newLine.makeShape();
 }
