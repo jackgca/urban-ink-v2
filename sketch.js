@@ -1,9 +1,7 @@
 // general settings
 
 let utils = require('../public/utils/index.js');
-utils.loadPiece('BezierLines');
-
-console.log(config);
+utils.loadPiece('FlowField');
 
 function setup() {
 	createCanvas(windowWidth, windowHeight, SVG);
@@ -18,13 +16,17 @@ function setup() {
 
 	randomSeed(config.seed);
 	noiseSeed(config.seed);
+	stroke(0, 0, 0, 1);
 
-	translate(windowWidth/2, windowHeight/2);
+	//translate(windowWidth/2, windowHeight/2);
 
 	console.log('starting');
 	
 	//BezierLines.example();
 
-	let newLine = new BezierLines.BezierLine(30, 40);
-	newLine.makeShape();
+	FlowField.setup();
+}
+
+function draw() {
+	FlowField.draw();
 }
