@@ -27,12 +27,12 @@ function Particle() {
     };
 
     this.show = function() {
-        stroke(this.h, 255, 255, 25);
+        //stroke(this.h, 255, 255, 25);
         this.h = this.h + 1;
         if (this.h > 255) {
             this.h = 0;
         }
-        strokeWeight(1);
+        //strokeWeight(1);
         line(this.pos.x, this.pos.y, this.prevPos.x, this.prevPos.y);
         this.updatePrev();
     };
@@ -62,8 +62,8 @@ function Particle() {
     };
 }
 
-let inc = 0.1;
-let scl = 10;
+let inc = 0.2;
+let scl = 50;
 let cols, rows;
 
 let flowField;
@@ -94,7 +94,6 @@ module.exports = {
                 v.setMag(1);
                 flowField[index] = v;
                 xoff+= inc;
-                stroke(0, 50);
             }
             yoff += inc;
             zoff += 0.0003;

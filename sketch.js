@@ -3,15 +3,18 @@
 let utils = require('../public/utils/index.js');
 utils.loadPiece('FlowField');
 
+let width = 800;
+let height = 600;
+
 function setup() {
-	createCanvas(windowWidth, windowHeight, SVG);
+	createCanvas(width, height, SVG);
 	colorMode(HSB);
 
 	background(config.bgColor);
 	stroke(config.penColor);
 	strokeWeight(config.thickness);
 
-	noLoop();
+	//noLoop();
 	noFill();
 
 	randomSeed(config.seed);
