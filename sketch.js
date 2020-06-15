@@ -3,9 +3,11 @@
 let utils = require('../public/utils/index.js');
 utils.loadPiece('Molnar');
 utils.loadPiece('BezierLines');
+utils.loadPiece('NoiseSquare');
 
 let width = 800;
 let height = 600;
+//let projectName = process.argv[2] || "default";
 
 let menlo;
 
@@ -27,7 +29,9 @@ function setup() {
 
 	noLoop();
 
-	//randomSeed(config.seed);
+	let seed = floor(random(0, 1000));
+
+	randomSeed(seed);
 	//noiseSeed(config.seed);
 	stroke(0, 0, 0, 1);
 	//translate(width/2, height/2);
@@ -39,5 +43,6 @@ function setup() {
 
 function draw() {
 	//Molnar.example();
-	BezierLines.example();
+	NoiseSquare.example();
+	//BezierLines.example();
 }

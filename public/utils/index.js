@@ -30,5 +30,9 @@ module.exports = {
                 callback(null, textArray);
             }
         });
+    },
+    imageSaver: function(callback) {
+        //fs.readFile(path.join(window.__dirname, '../')
+        // todo add function to get the current export count, save as jpg and svg (if possible) and update the counter
     }
 }
