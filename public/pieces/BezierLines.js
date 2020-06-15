@@ -12,7 +12,7 @@ class BezierLine {
     makeShape() {
         push();
         for (var i = 0; i < this.num_lines; i++) {
-            let n = noise(i, i+10) * 10 * (i < this.num_lines/2 ? -1 : 1);
+            let n = random() * noise(i, i+10) * 40 * (i < this.num_lines/2 ? -1 : 1);
             bezier(
                 this.coords[0], this.coords[1],
                 this.coords[0]*n, this.coords[1]*n,
@@ -25,15 +25,8 @@ class BezierLine {
 }
 
 class BezierLines {
-    constructor(line_size, num_lines, is_black) {
-        this.colors = [
-            [3, 70, 90, 1],
-            [45, 70, 90, 1],
-            [201, 82, 93, 1]
-        ];
-        if (is_black) {
-            this.colors = [0, 0, 0, 1];
-        }
+    constructor(line_size, num_lines, colors) {
+        this.colors = colors;
         this.line_size = line_size;
         this.num_lines = num_lines;
     }
@@ -41,22 +34,56 @@ class BezierLines {
     run() {
         let color_count = 0;
         let newLine;
-
         for (var i = 0; i < 5; i++) {
-            stroke(this.colors[color_count]);
-            noiseSeed(config.seed+(i*2));
+            push();
+            strokeWeight(2);
+            let c = this.colors[floor(random(0, 4))]
+            stroke(c);
+            noFill();
+            //noiseSeed(config.seed+(i*2));
             newLine = new BezierLine(this.line_size, this.num_lines);
             newLine.makeShape();
-            color_count++;
-            if (color_count == this.colors.length) color_count = 0;
+            pop();
         }
     }
 }
 
 module.exports = {
     example: function() {
-        let lines = new BezierLines(40, 8, true);
-	    lines.run();
+        let wcells = 8;
+        let hcells = 4;
+        let count = 0;
+
+        for (var i = 0; i < wcells; i++) {
+            for (var j = 0; j < hcells; j++) {
+                count++;
+                push();
+                //noFill();
+                translate(
+                    (width/wcells * i) + (width/wcells/2),
+                    height/hcells * j + (height/hcells/2)
+                );
+                //rotate(randomGaussian(0, 20));
+                let colors = [
+                    [260, 45, 16],
+                    [69, 12, 64],
+                    [35, 67, 82],
+                    [21, 67, 95],
+                    [20, 70, 73]
+                ];
+
+                colors = [
+                    [64, 21, 85],
+                    [171, 21, 75],
+                    [221, 48, 81],
+                    [239, 53, 74],
+                    [259, 57, 37]
+                ];
+
+                new BezierLines(2, count / 2, colors).run();
+                pop();
+            }
+        }
     },
     BezierLines,
     BezierLine
