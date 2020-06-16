@@ -69,12 +69,13 @@ function Line(start, end) {
 }
 
 class ScanPoly {
-    constructor(coords, x, y, angle) {
+    constructor(coords, x, y, angle, color) {
         this.coords = coords;
         this.x = x;
         this.y = y;
         this.angle = angle;
         this.lines = [];
+        this.color = color;
     }
 
     displayShape() {
@@ -98,16 +99,21 @@ class ScanPoly {
 
         // draw scan lines
         let count = 0;
-        for (var y = max.minY; y < max.maxY; y = y + (count / 10)) {
+        for (var y = max.minY; y < max.maxY; y = y + ((count + 2) / 10)) {
             let meetPoint = getMeetPoint(y, this.lines);
             for (var i = 1; i < meetPoint.length; i += 2) {
+                push();
+                if (this.color) {
+                    stroke(this.color);
+                }
                 line(meetPoint[i - 1], y, meetPoint[i], y);
+                pop();
             }
             count++;
         }
 
         // draw border
-        if (random() < 0.1) {
+        if (random() < -0.1) {
             beginShape();
             for (var i = 0; i < this.coords.length; i++) {
                 vertex(this.coords[i].x, this.coords[i].y);
@@ -118,12 +124,17 @@ class ScanPoly {
     }
 }
 
+function jitter(num, fac) {
+    return num + (noise(num) * fac * (random() < 0.5 ? 1 : -1));
+}
+
 module.exports = {
-    example: function() {
+    example1: function() {
         noFill();
-        let shapeSize = 20;
-        let numRows = 10;
-        let numCols = 10;
+        let shapeSize = 120;
+        let numRows = 5;
+        let numCols = 5;
+
         for (var i = 0; i < numRows; i++) {
             for (var j = 0; j < numCols; j++) {
                 let boundX = random(shapeSize);
@@ -135,8 +146,52 @@ module.exports = {
                     {x: Xs[1], y: Ys[1]},
                     {x: Xs[2], y: Ys[2]},
                     {x: Xs[3], y: Ys[3]},
-                ], (width / numCols) * j, (height / numRows) * i, 0).displayShape();
+                ], (width / numCols) * j + (width / numCols / 2) - (shapeSize / 2),
+                (height / numRows) * i + (height / numRows / 2) - (shapeSize / 2),
+                0).displayShape();
             }
+        }
+        shapeSize = 60;
+        strokeWeight(0.5);
+        for (var i = 0; i < numRows; i++) {
+            for (var j = 0; j < numCols; j++) {
+                let boundX = random(shapeSize);
+                let boundY = random(shapeSize);
+                let Xs = [0 + random(0, 5), boundX, random(boundX, shapeSize), random(shapeSize)];
+                let Ys = [0 + random(0, 5), boundY, random(boundY, shapeSize), random(shapeSize)];
+                new ScanPoly([
+                    {x: Xs[0], y: Ys[0]},
+                    {x: Xs[1], y: Ys[1]},
+                    {x: Xs[2], y: Ys[2]},
+                    {x: Xs[3], y: Ys[3]},
+                ], (width / numCols) * j + (width / numCols / 2) - (shapeSize / 2),
+                (height / numRows) * i + (height / numRows / 2) - (shapeSize / 2),
+                0).displayShape();
+            }
+        }
+    },
+    example2: function() {
+        noFill();
+        let numRows = 7;
+        let coords = [
+            {x: 0, y: 0},
+            {x: 10, y: 0},
+            {x: 10, y: 10},
+            {x: 0, y: 10}
+        ];
+
+        for (var i = 0; i < numRows; i++) {
+            for (x in coords) {
+                coords[x].x = jitter(coords[x].x, i * 10) * 1.2;
+                coords[x].y = jitter(coords[x].y, i * 10) * 1.2;
+            }
+            new ScanPoly(
+                coords,
+                (width / 2) - coords[0].x - 25,
+                (height / numRows * i),
+                0,
+                color('black')
+            ).displayShape();
         }
     }
 }

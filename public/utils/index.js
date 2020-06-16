@@ -64,6 +64,6 @@ module.exports = {
         })
     },
     midPoint: function(x1, y1, x2, y2, ratio) {
-        return {x: (x2 - x1) * ratio, y: (y2 - y1) * ratio};
+        return {x: x1 + ratio * (x2 - x1), y: y1 + ratio * (y2 - y1)};
     }
 }

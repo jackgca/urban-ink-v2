@@ -7,6 +7,7 @@ utils.loadPiece('Molnar');
 utils.loadPiece('BezierLines');
 utils.loadPiece('NoiseSquare');
 utils.loadPiece('ShadeFill');
+utils.loadPiece('FlowField');
 
 let width = 800;
 let height = 600;
@@ -15,7 +16,7 @@ let rootPath = path.join(window.__dirname, '..');
 let menlo;
 
 function mouseClicked() {
-	save();
+	//save();
 }
 
 
@@ -39,19 +40,18 @@ function setup() {
 	//noFill();
 
 	let seed = floor(random(0, 1000));
-	console.log('seed:', seed);
+	//console.log('seed:', seed);
 
-	randomSeed(seed);
-	//noiseSeed(config.seed);
+	randomSeed(311);
+	noiseSeed(311);
 	stroke(0, 0, 0, 1);
-	//translate(width/2, height/2);
-	//rotate(random(0, 360));
-	//loadPixels();
 }
 
 function draw() {
 	//Molnar.example();
 	//NoiseSquare.example1();
 	//BezierLines.example();
-	ShadeFill.example();
+	//ShadeFill.example1();
+	ShadeFill.example2();
+	//FlowField.example();
 }
