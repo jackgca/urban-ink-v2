@@ -1,4 +1,8 @@
 {
-    "project_name": "default",
-    "counter": 0
+    "default": {
+    	"counter": 0
+    },
+    "squares": {
+    	"counter": 0
+    }
 }

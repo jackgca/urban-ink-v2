@@ -20,6 +20,10 @@ class NoiseSquare {
         }
     }
 
+    get() {
+        return this.corners;
+    }
+
     displaySquare() {
         push();
         quad(
@@ -33,33 +37,21 @@ class NoiseSquare {
 }
 
 module.exports = {
-    example: function() {
-        //noFill();
-        console.log(width);
+    example1: function() {
+        noFill();
         let xcells = width/12;
         let ycells = height/10;
-        for (var i = 0; i < 12; i++) {
-            for (var j = 0; j < 10; j++) {
-                new NoiseSquare({x: i * xcells, y: ycells * j}, 20).displaySquare();
+        for (var h = 0; h < 4; h++) {
+            for (var i = 0; i < 12; i++) {
+                for (var j = 0; j < 10; j++) {
+                    new NoiseSquare({x: (i * xcells) + h, y: (ycells * j) + h}, 20).displaySquare();
+                }
             }
         }
-        stroke('red');
-        for (var i = 0; i < 12; i++) {
-            for (var j = 0; j < 10; j++) {
-                new NoiseSquare({x: (i * xcells) + 1, y: (ycells * j) + 1}, 20).displaySquare();
-            }
-        }
-        stroke('orange');
-        for (var i = 0; i < 12; i++) {
-            for (var j = 0; j < 10; j++) {
-                new NoiseSquare({x: (i * xcells) - 1, y: (ycells * j) - 1}, 20).displaySquare();
-            }
-        }
-        stroke('yellow');
-        for (var i = 0; i < 12; i++) {
-            for (var j = 0; j < 10; j++) {
-                new NoiseSquare({x: (i * xcells) + 2, y: (ycells * j) + 2}, 20).displaySquare();
-            }
+    },
+    example2: function() {
+        for (var i = 0; i < 50; i++) {
+            new NoiseSquare({x: (width / 2) + i, y: (height / 2) + i}, 50 - i).displaySquare();
         }
     }
 }

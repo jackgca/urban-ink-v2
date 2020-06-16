@@ -1,5 +1,6 @@
 var fs = require('fs');
 var readLine = require('readline');
+let fileName;
 
 module.exports = {
     loadPiece: function(pieceName) {
@@ -31,8 +32,38 @@ module.exports = {
             }
         });
     },
-    imageSaver: function(callback) {
-        //fs.readFile(path.join(window.__dirname, '../')
-        // todo add function to get the current export count, save as jpg and svg (if possible) and update the counter
+    startSaver: function() {
+        fs.readFile(path.join(rootPath, 'lib', 'export.json'), function(err, data) {
+            if (err) {
+                callback(err);
+            }
+
+            let exportData = JSON.parse(data);
+            for (project in exportData) {
+                console.log(project);
+                console.log(window.project_name);
+                if (project == window.project_name) {
+                    
+                    let filePath = path.join(
+                        rootPath,
+                        'export',
+                        project
+                    );
+
+                    let name = project + '-' + str(exportData[project].counter).padStart(4, '0');
+                    if (!fs.existsSync(filePath)) {
+                        fs.mkdirSync(filePath);
+                    }
+
+                    fileName = path.join(filePath, name);
+                    save(fileName + '.svg');
+                    //save(pathToFile + '.svg'); //
+                    //saveCanvas(pathToFile + '.jpg');
+                }
+            }
+        })
+    },
+    midPoint: function(x1, y1, x2, y2, ratio) {
+        return {x: (x2 - x1) * ratio, y: (y2 - y1) * ratio};
     }
 }
