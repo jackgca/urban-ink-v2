@@ -8,6 +8,7 @@ utils.loadPiece('BezierLines');
 utils.loadPiece('NoiseSquare');
 utils.loadPiece('ShadeFill');
 utils.loadPiece('FlowField');
+utils.loadPiece('PixelLines');
 
 let width = 800;
 let height = 600;
@@ -22,17 +23,18 @@ function mouseClicked() {
 
 function preload() {
 	menlo = loadFont('../lib/fonts/daisywhl.otf');
+	PixelLines.loadImg();
 }
 
 function setup() {
 	pixelDensity(1);
 	createCanvas(width, height, SVG);
-	colorMode(HSB);
+	//colorMode(HSB);
 	textFont(menlo);
 	textSize(32);
 	angleMode(DEGREES);
 
-	background(config.bgColor);
+	background('white');
 	stroke(config.penColor);
 	strokeWeight(config.thickness);
 
@@ -42,16 +44,17 @@ function setup() {
 	let seed = floor(random(0, 1000));
 	//console.log('seed:', seed);
 
-	randomSeed(311);
+	//randomSeed(311);
 	noiseSeed(311);
 	stroke(0, 0, 0, 1);
 }
 
 function draw() {
+	PixelLines.example();
 	//Molnar.example();
 	//NoiseSquare.example1();
 	//BezierLines.example();
 	//ShadeFill.example1();
-	ShadeFill.example2();
+	//ShadeFill.example2();
 	//FlowField.example();
 }

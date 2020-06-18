@@ -27,7 +27,7 @@ function createWindow() {
 	    mainWindow.webContents.on('did-finish-load', function () {
 	        var windowBounds = mainWindow.getBounds();
 	        devtools.setPosition(windowBounds.x + windowBounds.width, windowBounds.y);
-	        devtools.setSize(windowBounds.width/1.5, windowBounds.height);
+	        devtools.setSize(windowBounds.width/2, windowBounds.height);
 	    });
 	    
 	    mainWindow.on('move', function () {

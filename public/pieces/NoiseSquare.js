@@ -39,12 +39,12 @@ class NoiseSquare {
 module.exports = {
     example1: function() {
         noFill();
-        let xcells = width/12;
-        let ycells = height/10;
+        let xcells = width/6;
+        let ycells = height/6;
         for (var h = 0; h < 4; h++) {
             for (var i = 0; i < 12; i++) {
                 for (var j = 0; j < 10; j++) {
-                    new NoiseSquare({x: (i * xcells) + h, y: (ycells * j) + h}, 20).displaySquare();
+                    new NoiseSquare({x: (i * xcells) + h, y: (ycells * j) + h}, 30).displaySquare();
                 }
             }
         }
